@@ -20,6 +20,8 @@ export default function App() {
 const styles = StyleSheet.create({
   conatiner: {
     flex: 1,
+    alignItems:"center",    
+    width:"100%"
     
   },
 
