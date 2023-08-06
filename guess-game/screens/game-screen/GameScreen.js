@@ -15,8 +15,9 @@ let maxBoundry = 100;
 export default function GameScreen({ pickedNumber, gameOver }) {
   const initialGuess = generateSystemGuess(minBoundry, maxBoundry);
   const [systemGuess, setSystemGuess] = useState(initialGuess);
-
+  const [roundCount, setRoundCount] = useState(1)
   const generateNewGuess = (direction) => {
+    setRoundCount(roundCount=>roundCount+1)
     if (direction == "lower") {
       if (systemGuess > pickedNumber) {
         Alert.alert("Wrong Answer", "Yo Say lie", [
@@ -44,7 +45,7 @@ export default function GameScreen({ pickedNumber, gameOver }) {
   useEffect(() => {
     if (pickedNumber == systemGuess) {
       Alert.alert(`Your Guess Is:${pickedNumber}`);
-      gameOver();
+      gameOver(roundCount);
     }
   }, [systemGuess]);
 

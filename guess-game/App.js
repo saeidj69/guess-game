@@ -38,7 +38,9 @@ export default function App() {
     SplashScreen.hideAsync();
   }
 
-  const handleGameOver = () => {
+  const handleGameOver = (roundCount) => {
+    setRoundCounter(roundCount)
+
     setIsGameOver(true);
   };
   const userPickedNumber = (pickedNumber) => {
@@ -50,8 +52,7 @@ export default function App() {
     setUserInput("");
   };
 
-  const roundCount=()=>{
-    setRoundCounter(roundCounter=>roundCounter+1)
+  const roundCount=(round)=>{
   }
   let screen = <StartGameScreen userPickedNumber={userPickedNumber} />;
   if (userInput)
