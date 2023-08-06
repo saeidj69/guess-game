@@ -1,22 +1,63 @@
-import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+  View,
+  Text,
+} from "react-native";
+import { useFonts } from "expo-font";
+import React, { useCallback, useEffect, useState } from "react";
+import Entypo from "@expo/vector-icons/Entypo";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/game-screen/GameScreen";
-import GameOverScreen from "./screens/GameOverScreen"
+import GameOverScreen from "./screens/GameOverScreen";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
 
 export default function App() {
   const [userInput, setUserInput] = useState("");
-  const [isGameOver, setIsGameOver] = useState(false)
-  const handleGameOver=()=>{
-    setIsGameOver(true)
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [roundCounter, setRoundCounter] = useState(0)
+  const [fontLoaded] = useFonts({
+    "iran-sanse": require("./assets/font/IRANSans_Medium.ttf"),
+    "iran-sanse-bold": require("./assets/font/IRANSans_Bold.ttf"),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+
+    prepare();
+  }, []);
+
+  if (!fontLoaded) {
+    return null;
+  } else {
+    SplashScreen.hideAsync();
   }
+
+  const handleGameOver = () => {
+    setIsGameOver(true);
+  };
   const userPickedNumber = (pickedNumber) => {
     setUserInput(pickedNumber);
   };
+
+  const resetGame = () => {
+    setIsGameOver(false);
+    setUserInput("");
+  };
+
+  const roundCount=()=>{
+    setRoundCounter(roundCounter=>roundCounter+1)
+  }
   let screen = <StartGameScreen userPickedNumber={userPickedNumber} />;
-  if (userInput) screen = <GameScreen pickedNumber={userInput} gameOver={handleGameOver} />;
-  if(isGameOver) screen=<GameOverScreen />
+  if (userInput)
+    screen = <GameScreen pickedNumber={userInput} roundCount={roundCount} gameOver={handleGameOver} />;
+  if (isGameOver)
+    screen = <GameOverScreen pickedNumber={userInput} resetGame={resetGame} roundCounter={roundCounter}  />;
   return (
     <LinearGradient colors={["#b39ddb", "#ffeb3b"]} style={styles.conatiner}>
       <ImageBackground
@@ -36,7 +77,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     width: "100%",
-    
   },
 
   backgroundImage: {

@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
   buttonOuterContainer: {
     borderRadius: 8,
     marginHorizontal: 4,
+    marginVertical:16,
     overflow: "hidden",
   },
   buttonInnerContainer: {
-    width: 70,
+    width: 100,
     height: 40,
     backgroundColor:Colors.primary700 ,
     display: "flex",

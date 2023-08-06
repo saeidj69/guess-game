@@ -15,14 +15,16 @@ const styles = StyleSheet.create({
   titleContainer: {
     borderWidth: 2,
     borderColor: Colors.secondary500,
-    padding: 16,
+    paddingTop: 16,
     justifyContent:"center",
     
   },
   title: {
     fontSize: 24,
-    fontWeight: "700",
+    //fontWeight: "700",
+    fontFamily:"iran-sanse-bold",
     color: Colors.secondary600,
     textAlign:"center"
   },
+
 });

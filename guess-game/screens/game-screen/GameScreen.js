@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import Title from "../../components/Title";
 import Colors from "../../constant/Color";
 import Controllers from "./GameControllers";
@@ -41,25 +42,25 @@ export default function GameScreen({ pickedNumber, gameOver }) {
     }
   };
   useEffect(() => {
-    if (pickedNumber == systemGuess) gameOver();
-  }, [systemGuess]);
-  useEffect(() => {
-    if (pickedNumber == systemGuess) gameOver();
+    if (pickedNumber == systemGuess) {
+      Alert.alert(`Your Guess Is:${pickedNumber}`);
+      gameOver();
+    }
   }, [systemGuess]);
 
   return (
     <View style={styles.container}>
-      <Title systemGuess={systemGuess}>System Guess</Title>
+      <Title systemGuess={systemGuess}> حدس سیستم</Title>
       <View style={styles.actionContainer}>
         <Text style={styles.centerText}>Is Higher Or Lower</Text>
         {/* <Controllers generateSystemGuess={generateSystemGuess} /> */}
 
         <View style={styles.buttonContainer}>
-          <Button onPress={generateNewGuess.bind(this, "higher")}>
-            <Text>Higher</Text>
-          </Button>
           <Button onPress={generateNewGuess.bind(this, "lower")}>
-            <Text>Lower</Text>
+            <Ionicons name="md-remove" size={24} color="white" />
+          </Button>
+          <Button onPress={generateNewGuess.bind(this, "higher")}>
+            <Ionicons name="md-add" size={24} color="white" />
           </Button>
         </View>
       </View>
@@ -69,13 +70,14 @@ export default function GameScreen({ pickedNumber, gameOver }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingTop: 100,
   },
   centerText: {
     textAlign: "center",
     color: Colors.secondary600,
     fontSize: 16,
-    fontWeight: "500",
+    //fontWeight: "500",
+    fontFamily: "iran-sanse",
     marginTop: 16,
   },
   actionContainer: {
