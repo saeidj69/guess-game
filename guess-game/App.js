@@ -6,10 +6,8 @@ import {
   Text,
 } from "react-native";
 import { useFonts } from "expo-font";
-import React, { useCallback, useEffect, useState } from "react";
-import Entypo from "@expo/vector-icons/Entypo";
+import React, {useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import * as Font from "expo-font";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/game-screen/GameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
@@ -49,6 +47,7 @@ export default function App() {
 
   const resetGame = () => {
     setIsGameOver(false);
+    setRoundCounter(0);
     setUserInput("");
   };
 
@@ -67,7 +66,7 @@ export default function App() {
         style={styles.conatiner}
         imageStyle={styles.backgroundImage}
       >
-        <SafeAreaView style={styles.conatiner}>{screen}</SafeAreaView>
+        <SafeAreaView style={styles.mainConatiner}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
@@ -78,6 +77,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     width: "100%",
+    
+  },
+  mainConatiner: {
+    flex: 1,
+    alignItems: "center",
+    width: "100%",
+    padding:8
+    
   },
 
   backgroundImage: {
